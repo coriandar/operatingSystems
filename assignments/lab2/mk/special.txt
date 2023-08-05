@@ -1,7 +1,0 @@
-1 Special
-2 sPeciAl
-3 sPeciAl3
-4 sPeciAl*@#(*223
-5 special*@#(*223
-6 special123
-qsx5881@xv6:~/operatingSystems/assignments/lab2$ cat mn/special.txt 
