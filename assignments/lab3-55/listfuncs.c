@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include "prog4.h"
 
-int insert_last(struct List_item *head, struct List_item *item)
+int insert_last(List_item *head, List_item *item)
 {
   if (head == null)
   {
     return 0;
   }
 
-  struct List_item *current = head;
+  List_item *current = head;
 
   // iterate to end of linked list.
   while (current->next != null)
