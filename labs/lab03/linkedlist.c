@@ -10,19 +10,25 @@ struct List_item {
 
 int insert_last(struct List_item *head, struct List_item *item) 
 {
-  struct List_item* current = head;
-  while (current != null)
+  if (head == null)
+  {
+    return 0;
+  }
+
+  struct List_item *current = head;
+
+  // iterate to end of linked list.
+  while (current->next != null)
   {
     current = current->next;
-    if (current == null)
-    {
-	    current->next = item;
-	    printf("Inserted at end of list.");
-	    return 1;
-    }
   }
-  // iterate to end of linked list.
-  return 0;
+
+  if (current->next == null)
+  {
+    current->next = item;
+    printf("Inserted at end of list.\n");
+    return 1;
+  }
 }
 
 
