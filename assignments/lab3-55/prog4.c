@@ -5,14 +5,14 @@
 
 void main() {
   // Create five individual items
-  List_item head = {0, null};
-  List_item i1 = {1, null};
-  List_item i2 = {2, null};
-  List_item i3 = {3, null};
-  List_item i4 = {4, null};
+  struct List_item head = {0, null};
+  struct List_item i1 = {1, null};
+  struct List_item i2 = {2, null};
+  struct List_item i3 = {3, null};
+  struct List_item i4 = {4, null};
 
   // new one to add
-  List_item i5 = {5, null};
+  struct List_item i5 = {5, null};
 
   // Now link them up in the order 0-1-2-3-4
   //head.next = &i1;
@@ -30,7 +30,7 @@ void main() {
   insert_last(&head, &i5);
 
   // Go through the list and print the numbers in the order of the list
-  List_item* current = &head;
+  struct List_item* current = &head;
   while (current != null) {
     printf("%d-", current->item_num);
     current = current->next;
