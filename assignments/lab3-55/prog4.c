@@ -1,62 +1,39 @@
+// A simple linked list
 #include <stdio.h>
+#include "prog4.h"
+#include "listfuncs.h"
 
-struct List_Item
-{
-	int item_num;
-	struct List_Item* next;
-};
+void main() {
+  // Create five individual items
+  List_item head = {0, null};
+  List_item i1 = {1, null};
+  List_item i2 = {2, null};
+  List_item i3 = {3, null};
+  List_item i4 = {4, null};
 
-int insert_after(struct List_Item* list_head, struct List_Item* insert_item, int n);
-int remove_item(struct List_Item* list_head, int n);
-void print_linked_list(struct List_Item* head);
+  // new one to add
+  List_item i5 = {5, null};
 
-void main()
-{
-	struct List_Item head = { 0, NULL };
-	struct List_Item first = { 1, NULL };
-	struct List_Item second = { 3, NULL };
-	struct List_Item third = { 5, NULL };
-	struct List_Item fourth = { 7, NULL };
+  // Now link them up in the order 0-1-2-3-4
+  //head.next = &i1;
+  //i1.next = &i2;
+  //i2.next = &i3;
+  //i3.next = &i4;
 
-	head.next = &first;
-	first.next = &second;
-	second.next = &third;
-	third.next = &fourth;
+  // Now link them up in the order 0-3-2-4-1
+  head.next = &i3;
+  i3.next = &i2;
+  i2.next = &i4;
+  i4.next = &i1;
 
-	print_linked_list(&head);
+  // insert last
+  insert_last(&head, &i5);
 
-	struct List_Item item_one = { 2, NULL };
-	printf("Add 2 after 1: %d\n", insert_after(&head, &item_one, 1));
-	print_linked_list(&head);
-
-	struct List_Item item_two = { 4, NULL };
-	printf("Add 4 after 3: %d\n", insert_after(&head, &item_two, 3));
-	print_linked_list(&head);
-
-	struct List_Item item_three = { 6, NULL };
-	printf("Add 6 after 5: %d\n", insert_after(&head, &item_three, 5));
-	print_linked_list(&head);
-
-	struct List_Item item_four = { 8, NULL };
-	printf("Add 8 after 8: %d\n", insert_after(&head, &item_four, 8));
-	print_linked_list(&head);
-
-	struct List_Item item_five = { 8, NULL };
-	printf("Add 8 after 7: %d\n", insert_after(&head, &item_four, 7));
-	print_linked_list(&head);
-
-	printf("Remove 5: %d\n", remove_item(&head, 5));
-	print_linked_list(&head);
-
-	printf("Remove 0: %d\n", remove_item(&head, 0));
-	print_linked_list(&head);
-
-	printf("Remove 7: %d\n", remove_item(&head, 7));
-	print_linked_list(&head);
-
-	printf("Remove 8: %d\n", remove_item(&head, 8));
-	print_linked_list(&head);
-
-	printf("Remove 3: %d\n", remove_item(&head, 3));
-	print_linked_list(&head);
+  // Go through the list and print the numbers in the order of the list
+  List_item* current = &head;
+  while (current != null) {
+    printf("%d-", current->item_num);
+    current = current->next;
+  }
+  printf("\n");
 }
