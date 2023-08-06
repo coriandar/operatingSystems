@@ -6,25 +6,44 @@
 #include <stdio.h>
 #include "prog4.h"
 
-//int insert_after(List_item *list_head, List_item *insertItem, int n)
-//{
-//  if (head == null)
-//  {
-//    return 0;
-//  }
-//
-//  // requires find
-//}
-//
-//int remove_item()
-//{
-//  if (head == null)
-//  {
-//    return 0;
-//  }
-//
-//  // requires find
-//}
+int insert_after(List_item *list_head, List_item *insertItem, int n)
+{
+  if ((list_head->item_num != n) && (list_head->next != NULL))
+  {
+    return insert_after(list_head->next, insertItem, n);
+  }
+  else if (list_head->item_num == n)
+  {
+    insertItem->next = list_head->next;
+    list_head->next = insertItem;
+    return 1;
+  }
+
+}
+
+int remove_item(List_item *list_head, int n)
+{
+  if (list_head->item_num == n)
+  {
+    list_head = list_head->next;
+    //*list_head = *list_head->next;
+    return 1;
+  }
+
+  if (list_head->next != NULL)
+  {
+    if (list_head->next->item_num == n)
+    {
+      list_head->next = list_head->next->next;
+      return 1;
+    }
+      else
+    {
+      return remove_item(list_head->next, n);
+    }
+  }
+}
+
 
 
 
