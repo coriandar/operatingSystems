@@ -1,3 +1,8 @@
+/**
+ * Lab3: Assignment
+ * Group55: Jamie Lee, Tony Yee
+ **/
+
 // A simple linked list
 #include <stdio.h>
 #include "prog4.h"
@@ -29,11 +34,14 @@ void main() {
   // insert last
   insert_last(&head, &i5);
 
+  // print list
+  print_linked_list(&head);
+
   // Go through the list and print the numbers in the order of the list
-  List_item* current = &head;
-  while (current != null) {
-    printf("%d-", current->item_num);
-    current = current->next;
-  }
-  printf("\n");
+ // List_item* current = &head;
+ // while (current != null) {
+ //   printf("%d-", current->item_num);
+ //   current = current->next;
+ // }
+ // printf("\n");
 }

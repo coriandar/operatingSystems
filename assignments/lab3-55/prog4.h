@@ -1,3 +1,8 @@
+/**
+ * Lab3: Assignment
+ * Group55: Jamie Lee, Tony Yee
+ **/
+
 #ifndef PROG4_H
 #define PROG4_H
 

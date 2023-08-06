@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Lab2: Shell Scripting
-# Group55: Tony Yee, Jamie Lee
+# Lab2: Assignment
+# Group55: Jamie Lee, Tony Yee
 
 
 # Checks if arguments is exactly 2
