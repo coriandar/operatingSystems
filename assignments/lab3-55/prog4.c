@@ -85,11 +85,15 @@ void main() {
 
   printf("---------------------------------------------------\n");
 
-  //List_item *null_head = NULL;
-  //printf("TESTING: insert_after with NULL\n");
+  List_item *null_head = NULL;
+  List_item i5 = { 5, NULL };
 
-  //printf("TESTING: remove_item with NULL\n");
-  //printf("Remove 0: return code: %d\n", remove_item(null_head, 0));
+  printf("TESTING: insert_after with NULL\n");
+  printf("Add 5 after NULL: return code: %d\n", insert_after(null_head, &i5, 0));
+  printf("\n");
 
-  //printf("---------------------------------------------------\n");
+  printf("TESTING: remove_item with NULL\n");
+  printf("Remove 0: return code: %d\n", remove_item(null_head, 0));
+
+  printf("---------------------------------------------------\n");
 }
