@@ -3,6 +3,7 @@
  * Group55: Jamie Lee, Tony Yee
  **/
 
+// Must compile with gcc prog4.c listfuncs.c -o prog4
 // A simple linked list
 #include <stdio.h>
 #include "prog4.h"
