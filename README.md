@@ -33,6 +33,37 @@ gcc -c prog2.c // compile without linking, output object file
 gcc prog1.c prog2.c -o lab2linked // link object files
 ```
 --------------------------------------------------
+### __Makefile__
+#### `<VARNAME> =`
+- Define a variable name and initialize it to something
+```c
+ K=kernel
+ QEMU = qemu-system-riscv64
+```
+
+#### `$<VARNAME>` or `$(<VARNAME>)`
+- Replace with the value of the variable
+```c
+$K //will be replaced by kernel
+$(QEMU) //will be replaced by qemu-system-riscv64
+```
+
+#### `<label>` or `<filename>`: other labels or filenames
+- The label or filename before the colon is dependent on (or associated with) the labels and filenames that follow.
+- If the date of the dependent files are newer then the following lines of actions will be taken. Otherwise ignore.
+```c
+$U/usys.o :  $U/usys.S
+$(CC) $(CFLAGS) -c -o $U/usys.o $U/usys.S
+// If usys.S has a newer date than usys.o, then it indicates that usys.o is out-of-date.
+// The action is to compile usys.S to produce usys.o 
+```
+
+#### % (Wildcard)
+- `%.o` means any file with extension .o
+
+#### / (line continuation)
+- The current line continues on the next line.
+--------------------------------------------------
 ### __Shell script Operators__
 ```java
 -eq // equal to
