@@ -8,6 +8,11 @@
 
 int insert_after(List_item *list_head, List_item *insertItem, int n)
 {
+  if (list_head == null)
+  { 
+    return 0;
+  }
+
   if ((list_head->item_num != n) && (list_head->next != NULL))
   {
     return insert_after(list_head->next, insertItem, n);
@@ -18,6 +23,10 @@ int insert_after(List_item *list_head, List_item *insertItem, int n)
     list_head->next = insertItem;
     return 1;
   }
+  else
+  {
+    return 0;
+  }
 
 }
 
@@ -25,8 +34,7 @@ int remove_item(List_item *list_head, int n)
 {
   if (list_head->item_num == n)
   {
-    list_head = list_head->next;
-    //*list_head = *list_head->next;
+    *list_head = *list_head->next;
     return 1;
   }
 
