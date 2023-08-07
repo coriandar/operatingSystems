@@ -12,8 +12,8 @@
 // define struct in header.
 typedef struct List_item
 {
-  int item_num;
-  struct List_item* next;
+    int item_num;
+    struct List_item* next;
 } List_item;
 
 #endif
