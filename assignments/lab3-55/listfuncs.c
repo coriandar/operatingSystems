@@ -8,11 +8,6 @@
 
 int insert_after(List_item *list_head, List_item *insertItem, int n)
 {
-  if (list_head == null)
-  { 
-    return 0;
-  }
-
   if ((list_head->item_num != n) && (list_head->next != NULL))
   {
     return insert_after(list_head->next, insertItem, n);
@@ -52,33 +47,6 @@ int remove_item(List_item *list_head, int n)
   }
 }
 
-
-
-
-
-int insert_last(List_item *head, List_item *item)
-{
-  if (head == null)
-  {
-    return 0;
-  }
-
-  List_item *current = head;
-
-  // iterate to end of linked list.
-  while (current->next != null)
-  {
-    current = current->next;
-  }
-
-  if (current->next == null)
-  {
-    current->next = item;
-    printf("Inserted at end of list.\n");
-    return 1;
-  }
-}
-
 // Go through the list and print the numbers in the order of the list
 void print_linked_list(List_item *head)
 {
@@ -90,13 +58,7 @@ void print_linked_list(List_item *head)
     {
       print_linked_list(head->next);
     }
-
   }
-  //while (current != null) {
-  //  printf("%d-", current->item_num);
-  //  current = current->next;
-  //}
-  //printf("\n");
 }
 
 

@@ -47,18 +47,18 @@ void main() {
   print_linked_list(&head);
 
   List_item item_four = { 8, NULL };
-  printf("Add 8 after 8: return code: %d\n", insert_after(&head, &item_four, 8));
-  printf("Current linkedlist: ");
-  print_linked_list(&head);
-
-  List_item item_five = { 8, NULL };
   printf("Add 8 after 7: return code: %d\n", insert_after(&head, &item_four, 7));
   printf("Current linkedlist: ");
   print_linked_list(&head);
+
+  List_item item_five = { 9, NULL };
+  printf("Add 9 after 9: return code: %d\n", insert_after(&head, &item_five, 9));
+  printf("Current linkedlist: ");
+  print_linked_list(&head);
+
   printf("---------------------------------------------------\n");
 
   printf("TESTING: remove_item\n");
-  //TODO: remove head not working
   printf("Remove 0: return code: %d\n", remove_item(&head, 0));
   printf("Current linkedlist: ");
   print_linked_list(&head);
@@ -82,4 +82,14 @@ void main() {
   printf("Remove 3: return code: %d\n", remove_item(&head, 3));
   printf("Current linkedlist: ");
   print_linked_list(&head);
+
+  printf("---------------------------------------------------\n");
+
+  //List_item *null_head = NULL;
+  //printf("TESTING: insert_after with NULL\n");
+
+  //printf("TESTING: remove_item with NULL\n");
+  //printf("Remove 0: return code: %d\n", remove_item(null_head, 0));
+
+  //printf("---------------------------------------------------\n");
 }
