@@ -33,6 +33,9 @@ gcc -c prog2.c // compile without linking, output object file
 gcc prog1.c prog2.c -o lab2linked // link object files
 ```
 --------------------------------------------------
+### __Qemu__
+- Exit. `ctrl+a`, then release, press `x`.
+--------------------------------------------------
 ### __Makefile__
 #### `<VARNAME> =`
 - Define a variable name and initialize it to something
