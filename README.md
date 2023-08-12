@@ -12,6 +12,9 @@
 - Where `pwd` is one before lab3-55.
 - `tar -cvf Lab3-55.tar lab3-55/`
 - `tar cvf Lab3-55.tar lab3-55/`, without hyphen is same as above.
+
+#### Checking
+- `tar -tf Lab5-55.tar`, check sub-dir & files archived.
 --------------------------------------------------
 ### __Extract archive with tar__
 #### Format
