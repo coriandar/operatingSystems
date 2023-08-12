@@ -26,6 +26,53 @@ extern char trampoline[]; // trampoline.S
 // must be acquired before any p->lock.
 struct spinlock wait_lock;
 
+
+// Print a formatted process listing to console.
+int procshow(void)
+{
+  static char *states[] = {
+  [UNUSED]    "unused",
+  [SLEEPING]  "sleep ",
+  [RUNNABLE]  "runble",
+  [RUNNING]   "run   ",
+  [ZOMBIE]    "zombie"
+  };
+
+  struct proc *p;
+  char *state;
+  int counter = 0;
+
+  printf("\n");
+
+  for(p = proc; p < &proc[NPROC]; p++)
+  {
+    if(p->state == UNUSED) // ignore UNUSED
+    {
+      continue;
+    }
+
+    if(p->state >= 0 && p->state < NELEM(states) && states[p->state])
+    {
+      state = states[p->state]; // set state string
+    }
+    else
+    {
+      state = "???"; // unknown state
+    }
+
+    printf("%d ", p->pid); // print pid
+    printf("%d ", p->pid == 1 ? 0 : p->parent->pid); // print parent pid, print 0 for init
+    printf("%s ", state); // print state
+    printf("%s ", p->name); // print name
+    printf("%d ", p->sz); // print size
+    printf("\n");
+    counter++; // increase count
+  }
+
+  printf("There are a total of %d processes in the system\n", counter);
+  return 1;
+}
+
 // Allocate a page for each process's kernel stack.
 // Map it high in memory, followed by an invalid
 // guard page.

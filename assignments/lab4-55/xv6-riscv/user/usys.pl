@@ -17,6 +17,7 @@ sub entry {
 	
 # custom
 entry("getthisprocsize");
+entry("showprocs"); # add entry stub
 
 entry("fork");
 entry("exit");
