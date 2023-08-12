@@ -53,6 +53,23 @@ gcc prog1.c prog2.c -o lab2linked // link object files
     - Add one corresponding to the new system call to the end of it. `[SYS_getthisprocsize] sys_getthisprocsize,`
 6. Make sure system call function implementation has been entered into the appropriate C file of the kernel.
 7. Test with: `make qemu`
+
+#### Add `showprocs` system call
+```c
+user/user.h // add prototype
+user/usys.pl // add entry stub
+kernel/syscall.h // add to last with num
+kernel/syscall.c // add prototype
+kernel/syscall.c // add pointer
+kernel/sysproc.c // implement system call
+
+// specific to showprocs
+kernel/proc.c // implement new fun
+kernel/defs.h // add prototype for new func
+user/ps.c // add code to call make call
+/Makefile // add _userprog\
+```
+
 --------------------------------------------------
 ### __Qemu__
 - Exit. `ctrl+a`, then release, press `x`.
