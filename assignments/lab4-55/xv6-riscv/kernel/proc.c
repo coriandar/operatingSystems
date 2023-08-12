@@ -70,6 +70,8 @@ int procshow(void)
   }
 
   printf("There are a total of %d processes in the system\n", counter);
+  printf("\n");
+
   return 1;
 }
 
