@@ -26,50 +26,6 @@ extern char trampoline[]; // trampoline.S
 // must be acquired before any p->lock.
 struct spinlock wait_lock;
 
-// No lock to avoid wedging a stuck machine further.
-void
-proc_print(void)
-{
-  static char *states[] = {
-  [UNUSED]    "unused",
-  [SLEEPING]  "sleep ",
-  [RUNNABLE]  "runble",
-  [RUNNING]   "run   ",
-  [ZOMBIE]    "zombie"
-  };
-
-  struct proc *p;
-  char *state;
-  int counter = 0;
-
-  printf("\n");
-
-  for(p = proc; p < &proc[NPROC]; p++){
-    if(p->state == UNUSED)
-    {
-      continue;
-    }
-
-    if(p->state >= 0 && p->state < NELEM(states) && states[p->state])
-    {
-      state = states[p->state];
-    }
-    else
-    {
-      state = "???";
-    }
-
-    printf("%d ", p->pid);
-    printf("%d ", p->pid == 1 ? 0 : p->parent->pid);
-    printf("%s ", state);
-    printf("%s ", p->name);
-    printf("%d", p->sz);
-    printf("\n");
-    counter++;
-  }
-  printf("There are total of %d processes in the system.", counter);
-}
-
 // Allocate a page for each process's kernel stack.
 // Map it high in memory, followed by an invalid
 // guard page.
@@ -698,4 +654,3 @@ procdump(void)
     printf("\n");
   }
 }
-

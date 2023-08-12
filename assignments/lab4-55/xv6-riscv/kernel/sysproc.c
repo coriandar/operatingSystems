@@ -14,13 +14,6 @@ uint64 sys_getthisprocsize(void)
   return p->sz; // returns the size in bytes
 }
 
-// new show procs call
-uint64 sys_showprocs(void)
-{
-  proc_print();
-  return 1; // if successful
-}
-
 uint64
 sys_exit(void)
 {

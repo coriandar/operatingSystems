@@ -26,7 +26,6 @@ int uptime(void);
 
 // new system calls
 int getthisprocsize(void);
-int showprocs(void);
 
 // ulib.c
 int stat(const char*, struct stat*);

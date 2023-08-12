@@ -21,4 +21,3 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_getthisprocsize  22
-#define SYS_showprocs 23

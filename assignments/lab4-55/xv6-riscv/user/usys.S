@@ -5,11 +5,6 @@ getthisprocsize:
  li a7, SYS_getthisprocsize
  ecall
  ret
-.global showprocs
-showprocs:
- li a7, SYS_showprocs
- ecall
- ret
 .global fork
 fork:
  li a7, SYS_fork
