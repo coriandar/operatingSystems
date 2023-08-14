@@ -1,6 +1,8 @@
 ### __fork()__
 - Creates exact copy of parent process, not very useful.
 - Often `exec()` system call is made in child process, exec diff program.
+--------------------------------------------------
+### __exec()__
 - Letters following `exec` refer to:
     - `e` and array of pointer to env variables is explicitly passed to the new process image.
     - `l` cli args are passed individually to function.
