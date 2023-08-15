@@ -80,7 +80,26 @@ kernel/defs.h // add prototype for new func
 user/ps.c // add code to call make call
 /Makefile // add _userprog\
 ```
+- user/[user.h][user_h]
+- user/[usys.pl][usys_pl]
+- kernel/[syscall.h][syscall_h]
+- kernel/[syscall.c][syscall_c]
+- kernel/[syscall.c][syscall_c]
+- kernel/[sysproc.c][sysproc_c]
+- kernel/[proc.c][proc_c]
+- kernel/[defs.h][defs_h]
+- user/[ps.c][ps_c]
+- /[Makefile][Makefile_]
 
+[user_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/user/user.h
+[usys_pl]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/user/usys.pl
+[syscall_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/kernel/syscall.h
+[syscall_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/kernel/syscall.c
+[sysproc_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/kernel/sysproc.c
+[proc_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/kernel/proc.c
+[defs_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/kernel/defs.h
+[ps_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/user/ps.c
+[Makefile_]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab4-55/xv6-riscv/Makefile
 --------------------------------------------------
 ### __Qemu__
 - Exit. `ctrl+a`, then release, press `x`.
