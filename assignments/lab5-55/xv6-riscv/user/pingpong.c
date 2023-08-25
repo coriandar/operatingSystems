@@ -6,6 +6,7 @@ int main(void) {
 	int p[2];
 	pipe(p);
 
+
 	char parent[] = "Message from parent";
 	char child[] = "Message from child";
 
