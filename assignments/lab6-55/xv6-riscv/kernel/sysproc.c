@@ -7,6 +7,35 @@
 #include "spinlock.h"
 #include "proc.h"
 
+// You should copy this kernel function to sysproc.c
+// and set up a system call for pageAccess() in xv6
+
+int
+sys_pageAccess(void)
+{
+    // Get the three function arguments from the pageAccess() system call
+	uint64 usrpage_ptr;  // First argument - pointer to user space address
+	int npages;          // Second argument - the number of pages to examine
+	uint64 usraddr;      // Third argument - pointer to the bitmap
+	argaddr(0, &usrpage_ptr);
+	argint(1, &npages);
+	argaddr(2, &usraddr);
+
+	struct proc* p = myproc();
+	// . . . Add your code for this function here . . .
+	uint64 bitmap; // pointer to unsigned integer, copy to usraddr
+    //int counter = 0;
+    printf("%p\n", usrpage_ptr);
+    printf("%d\n", npages);
+    printf("%p\n", usraddr);
+    
+
+	// Return the bitmap pointer to the user program
+	copyout(p->pagetable, usraddr, (char*)&bitmap, sizeof(bitmap));
+	return 0;
+}
+
+
 uint64
 sys_exit(void)
 {
