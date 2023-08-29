@@ -13,8 +13,9 @@ main ()
 	unsigned int abits;
 	printf("Page access test starting\n");
 
-	buf = malloc(32 * PGSIZE);   // allocate 32 pages of physical memory
-	if (pageAccess(buf, 32, &abits) < 0)   // pageAccess() is the system call
+    int n = 64;
+	buf = malloc(n * PGSIZE);   // allocate 32 pages of physical memory
+	if (pageAccess(buf, n, &abits) < 0)   // pageAccess() is the system call
 	{
 		printf("pageAccess failed\n");
 		free(buf);
@@ -26,17 +27,30 @@ main ()
 	// Change the page numbers and the number of pages to thoroughly test the system call
 	buf[PGSIZE * 1] += 1;
 	buf[PGSIZE * 2] += 1;
+	buf[PGSIZE * 3] += 1;
+	buf[PGSIZE * 5] += 1;
+	buf[PGSIZE * 10] += 1;
     buf[PGSIZE * 30] += 1;
+    buf[PGSIZE * 31] += 1;
 
     // Let pageAccess check the pages accessed in buf
-    if (pageAccess(buf, 32, &abits) < 0)
+    if (pageAccess(buf, n, &abits) < 0)
     {
     	printf("pageAccess failed\n");
     	free(buf);
     	exit(1);
     }
 
-    if (abits != ((1 << 1) | (1 << 2) | (1 << 30)))
+    //if (abits != ((1 << 1) | (1 << 2) | (1 << 30)))
+    if (abits != (
+                (1 << 1) | 
+                (1 << 2) | 
+                (1 << 3) | 
+                (1 << 5) | 
+                (1 << 10) | 
+                (1 << 30) | 
+                (1 << 31)
+                ))
     {
     	printf("Incorrect access bits set\n");
     } else {

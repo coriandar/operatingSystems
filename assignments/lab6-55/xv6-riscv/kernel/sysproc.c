@@ -7,9 +7,6 @@
 #include "spinlock.h"
 #include "proc.h"
 
-// You should copy this kernel function to sysproc.c
-// and set up a system call for pageAccess() in xv6
-
 int
 sys_pageAccess(void)
 {
@@ -17,23 +14,18 @@ sys_pageAccess(void)
 	uint64 usrpage_ptr;  // First argument - pointer to user space address
 	int npages;          // Second argument - the number of pages to examine
 	uint64 usraddr;      // Third argument - pointer to the bitmap
-	argaddr(0, &usrpage_ptr);
-	argint(1, &npages);
-	argaddr(2, &usraddr);
 
-	if (argaddr(0, &usrpage_ptr) < 0 || argint(1, &npages) < 0 || argaddr(2, &usraddr) < 0) {
-        return -1;
-    }
+	if (argaddr(0, &usrpage_ptr) < 0) return -1;
+	if (argint(1, &npages) < 0 || npages > 64) return -1;
+	if (argaddr(2, &usraddr) < 0) return -1;
 
 	struct proc* p = myproc();
-    uint64 bitmap = 0; // create bitmap
-	// . . . Add your code for this function here . . .
-	//uint64 bitmap; // pointer to unsigned integer, copy to usraddr
+    uint64 bitmap = 0; // create bitmap copy to usraddr
     for(int i = 0; i < npages; i++) {
         uint64 virtualAddress = usrpage_ptr + i * PGSIZE; // get va
         pte_t *pte = nextaddr(p->pagetable, virtualAddress); // this uses walk
         if (pte) {
-            if ((*pte) & PTE_A) {
+            if ((*pte) & PTE_A) { // if has access flag
                 *pte &= ~PTE_A; // clear PTE_A
                 bitmap |= (1 << i); // update bitmap
             }
@@ -41,7 +33,10 @@ sys_pageAccess(void)
     }
 
 	// Return the bitmap pointer to the user program
-	copyout(p->pagetable, usraddr, (char*)&bitmap, sizeof(bitmap));
+	if(copyout(p->pagetable, usraddr, (char*)&bitmap, sizeof(bitmap)) < 0) {
+        return -1;
+    }
+
 	return 0;
 }
 
