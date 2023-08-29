@@ -21,14 +21,24 @@ sys_pageAccess(void)
 	argint(1, &npages);
 	argaddr(2, &usraddr);
 
+	if (argaddr(0, &usrpage_ptr) < 0 || argint(1, &npages) < 0 || argaddr(2, &usraddr) < 0) {
+        return -1;
+    }
+
 	struct proc* p = myproc();
+    uint64 bitmap = 0; // create bitmap
 	// . . . Add your code for this function here . . .
-	uint64 bitmap; // pointer to unsigned integer, copy to usraddr
-    //int counter = 0;
-    printf("%p\n", usrpage_ptr);
-    printf("%d\n", npages);
-    printf("%p\n", usraddr);
-    
+	//uint64 bitmap; // pointer to unsigned integer, copy to usraddr
+    for(int i = 0; i < npages; i++) {
+        uint64 virtualAddress = usrpage_ptr + i * PGSIZE; // get va
+        pte_t *pte = nextaddr(p->pagetable, virtualAddress); // this uses walk
+        if (pte) {
+            if ((*pte) & PTE_A) {
+                *pte &= ~PTE_A; // clear PTE_A
+                bitmap |= (1 << i); // update bitmap
+            }
+        }
+    }
 
 	// Return the bitmap pointer to the user program
 	copyout(p->pagetable, usraddr, (char*)&bitmap, sizeof(bitmap));

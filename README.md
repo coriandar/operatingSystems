@@ -63,7 +63,11 @@ kernel/syscall.c // add prototype, add pointer
 kernel/sysproc.c // implement system call
 kernel/riscv.h // define PTE_A
 user/pgaccess_test.h // add riscv.h, has PGSIZE defined
-/Makefile // add _userprog\
+/Makefile // add _userprog
+
+// add nextaddr function
+kernel/vm.c // calls walk
+kernel/defs.h // calls walk
 ```
 - user/[user.h][user_h]
 - user/[usys.pl][usys_pl]
@@ -73,6 +77,8 @@ user/pgaccess_test.h // add riscv.h, has PGSIZE defined
 - kernel/[riscv.h][riscv_h]
 - user/[pgaccess_test.h][pgaccess_test_h]
 - /[Makefile][Makefile_]
+- kernel/[vm.c][vm_c]
+- kernel/[defs.h][defs_h]
 
 [user_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/user.h
 [usys_pl]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/usys.pl
@@ -82,6 +88,8 @@ user/pgaccess_test.h // add riscv.h, has PGSIZE defined
 [riscv_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/riscv.h
 [pgaccess_test_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/pgaccess_test.c
 [Makefile_]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/Makefile
+[vm_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/vm.c
+[defs_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/defs.h
 
 --------------------------------------------------
 ### __Add a System Call to xv6-riscv__

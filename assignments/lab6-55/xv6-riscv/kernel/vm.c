@@ -31,6 +31,13 @@ ptableprint_level(pagetable_t pagetable, int level)
 
 		for (int j = 0; j < level; j++) printf(".. ");
 
+        if (!(pte & PTE_A)) {
+            printf("Not accessed\n");
+        }
+        else {
+            printf("Accessed\n");
+        }
+
 		// definition in `riscv.h`
 		// This macro shifts a PTE value right 10 bits, then shift the result left 12 bits.
 		
@@ -135,6 +142,13 @@ walk(pagetable_t pagetable, uint64 va, int alloc)
     }
   }
   return &pagetable[PX(0, va)];
+}
+
+// new function to call walk
+pte_t *
+nextaddr(pagetable_t pagetable, uint64 va)
+{
+    return walk(pagetable, va, 0);
 }
 
 // Look up a virtual address, return the physical address,

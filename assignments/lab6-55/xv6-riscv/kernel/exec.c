@@ -117,7 +117,7 @@ exec(char *path, char **argv)
   proc_freepagetable(oldpagetable, oldsz);
 
   // function should be called just before exec returns
-  ptableprint(p->pagetable);
+  //ptableprint(p->pagetable);
 
   return argc; // this ends up in a0, the first argument to main(argc, argv)
 
