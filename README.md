@@ -47,6 +47,51 @@ gcc -c prog2.c // compile without linking, output object file
 gcc prog1.c prog2.c -o lab2linked // link object files
 ```
 --------------------------------------------------
+### __Add sys_pageAccess
+- Take start address of virtual address.
+- From that get to page table.
+- Check the flag of each entry in pagetable.
+- Track each entry in unsigned int, bits
+- 32bit, 0 false, 1 for true.
+- return an increment first to test if counting accessed.
+
+```c
+user/user.h // add prototype
+user/usys.pl // add entry stub
+kernel/syscall.h // add to last with num
+kernel/syscall.c // add prototype, add pointer
+kernel/sysproc.c // implement system call
+kernel/riscv.h // define PTE_A
+user/pgaccess_test.h // add riscv.h, has PGSIZE defined
+/Makefile // add _userprog
+
+// add nextaddr function
+kernel/vm.c // calls walk
+kernel/defs.h // calls walk
+```
+- user/[user.h][user_h]
+- user/[usys.pl][usys_pl]
+- kernel/[syscall.h][syscall_h]
+- kernel/[syscall.c][syscall_c]
+- kernel/[sysproc.c][sysproc_c]
+- kernel/[riscv.h][riscv_h]
+- user/[pgaccess_test.h][pgaccess_test_h]
+- /[Makefile][Makefile_]
+- kernel/[vm.c][vm_c]
+- kernel/[defs.h][defs_h]
+
+[user_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/user.h
+[usys_pl]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/usys.pl
+[syscall_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/syscall.h
+[syscall_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/syscall.c
+[sysproc_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/sysproc.c
+[riscv_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/riscv.h
+[pgaccess_test_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/pgaccess_test.c
+[Makefile_]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/Makefile
+[vm_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/vm.c
+[defs_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/defs.h
+
+--------------------------------------------------
 ### __Add a System Call to xv6-riscv__
 1. New system call function prototype has been added to the list of existing system calls in `user.h`. i.e., `int getthisprocsize(void);`
 2. Add an stub entry to `usys.pl` i.e., `entry("getthisprocsize");`
