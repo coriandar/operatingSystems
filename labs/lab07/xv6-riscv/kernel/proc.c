@@ -110,15 +110,24 @@ allocproc(void)
     acquire(&p->lock);
     if(p->state == UNUSED) {
       goto found;
-    } else {
-      release(&p->lock);
+    } 
+    else 
+    {	    
+	 release(&p->lock);
     }
   }
+
   return 0;
 
 found:
   p->pid = allocpid();
   p->state = USED;
+  
+  p->create_time = ticks;
+  p->run_time = 0;
+  p->wait_time = 0;
+  p->sleep_time = 0;
+  p->exit_time = 0;
 
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0){
@@ -370,6 +379,7 @@ exit(int status)
 
   p->xstate = status;
   p->state = ZOMBIE;
+  p->exit_time = ticks;
 
   release(&wait_lock);
 
@@ -652,5 +662,77 @@ procdump(void)
       state = "???";
     printf("%d %s %s", p->pid, state, p->name);
     printf("\n");
+ }
+}
+
+void
+update_timings(void)
+{
+  struct proc* p;
+  for(p = proc; p < &proc[NPROC]; p++)
+  {
+    acquire(&p->lock);
+
+    if(p->state == RUNNING){
+      p->run_time += 1;
+    }
+	else if(p->state == RUNNABLE) {
+	  p->wait_time += 1;
+	} else if(p->state == SLEEPING){
+      p->sleep_time += 1;
+    }
+
+    release(&p->lock);
+  }
+}
+
+int
+wait2(uint64 addr, uint* run, uint* wait, uint* sleepTime)
+{
+  struct proc *np;
+  int havekids, pid;
+  struct proc *p = myproc();
+
+  acquire(&wait_lock);
+
+  for(;;){
+    // Scan through table looking for exited children.
+    havekids = 0;
+    for(np = proc; np < &proc[NPROC]; np++){
+      if(np->parent == p){
+        // make sure the child isn't still in exit() or swtch().
+        acquire(&np->lock);
+
+        havekids = 1;
+        if(np->state == ZOMBIE){
+          // Found one.
+          pid = np->pid;
+	  *run = np->run_time;
+	  *wait = np->wait_time;
+	  *sleepTime = np->sleep_time;
+
+          if(addr != 0 && copyout(p->pagetable, addr, (char *)&np->xstate,
+                                  sizeof(np->xstate)) < 0) {
+            release(&np->lock);
+            release(&wait_lock);
+            return -1;
+          }
+          freeproc(np);
+          release(&np->lock);
+          release(&wait_lock);
+          return pid;
+        }
+        release(&np->lock);
+      }
+    }
+
+    // No point waiting if we don't have any children.
+    if(!havekids || p->killed){
+      release(&wait_lock);
+      return -1;
+    }
+
+    // Wait for a child to exit.
+    sleep(p, &wait_lock);  //DOC: wait-sleep
   }
 }
