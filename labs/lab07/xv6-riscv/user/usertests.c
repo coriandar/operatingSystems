@@ -686,7 +686,7 @@ exectest(char *s)
     close(1);
     fd = open("echo-ok", O_CREATE|O_WRONLY);
     if(fd < 0) {
-      printf("%s: create failed\n", s);
+     printf("%s: create failed\n", s);
       exit(1);
     }
     if(fd != 1) {
@@ -713,7 +713,7 @@ exectest(char *s)
   if (read(fd, buf, 2) != 2) {
     printf("%s: read failed\n", s);
     exit(1);
-  }
+ }
   unlink("echo-ok");
   if(buf[0] == 'O' && buf[1] == 'K')
     exit(0);
@@ -740,7 +740,7 @@ pipe1(char *s)
   pid = fork();
   seq = 0;
   if(pid == 0){
-    close(fds[0]);
+   close(fds[0]);
     for(n = 0; n < N; n++){
       for(i = 0; i < SZ; i++)
         buf[i] = seq++;
