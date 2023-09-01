@@ -22,8 +22,8 @@ int dup(int);
 int getpid(void);
 char* sbrk(int);
 int sleep(int);
-int uptime(void);
-int wait2(int, int*, int*, int*);
+int uptime(int);
+int wait2(int*, int*, int*, int*); // add syscall
 
 // ulib.c
 int stat(const char*, struct stat*);

@@ -122,12 +122,14 @@ allocproc(void)
 found:
   p->pid = allocpid();
   p->state = USED;
-  
-  p->create_time = ticks;
+
+  // initialize after the process status becomes USED
+  p->create_time = ticks; // current time
   p->run_time = 0;
   p->wait_time = 0;
   p->sleep_time = 0;
   p->exit_time = 0;
+
 
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0){
@@ -379,7 +381,7 @@ exit(int status)
 
   p->xstate = status;
   p->state = ZOMBIE;
-  p->exit_time = ticks;
+  p->exit_time = ticks; // record exit time
 
   release(&wait_lock);
 
@@ -707,12 +709,14 @@ wait2(uint64 addr, uint* run, uint* wait, uint* sleepTime)
         if(np->state == ZOMBIE){
           // Found one.
           pid = np->pid;
-	  *run = np->run_time;
-	  *wait = np->wait_time;
-	  *sleepTime = np->sleep_time;
+
+          // assign timing values in PCB of this process
+          *run = np->run_time;
+          *wait = np->wait_time;
+          *sleepTime = np->sleep_time;
 
           if(addr != 0 && copyout(p->pagetable, addr, (char *)&np->xstate,
-                                  sizeof(np->xstate)) < 0) {
+            sizeof(np->xstate)) < 0) {
             release(&np->lock);
             release(&wait_lock);
             return -1;
