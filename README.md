@@ -87,8 +87,8 @@ user/user.h // add prototype
 user/usys.pl // add entry stub
 kernel/syscall.h // add to last with num
 kernel/syscall.c // add prototype, add pointer
-kernel/sysproc.c // implement system call
 kernel/riscv.h // define PTE_A
+kernel/sysproc.c // implement system call
 user/pgaccess_test.h // add riscv.h, has PGSIZE defined
 /Makefile // add _userprog
 
@@ -96,14 +96,14 @@ user/pgaccess_test.h // add riscv.h, has PGSIZE defined
 kernel/vm.c // calls walk
 kernel/defs.h // calls walk
 ```
-- [user.h][user_h] | [usys.pl][usys_pl] | [syscall.h][syscall_h] | [syscall.c][syscall_c] | [sysproc.c][sysproc_c] | [riscv.h][riscv_h] | [pgaccess_test.h][pgaccess_test_h] | [Makefile][Makefile_] | [vm.c][vm_c] | [defs.h][defs_h]
+- [user.h][user_h] | [usys.pl][usys_pl] | [syscall.h][syscall_h] | [syscall.c][syscall_c] | [riscv.h][riscv_h] | [sysproc.c][sysproc_c] | [pgaccess_test.h][pgaccess_test_h] | [Makefile][Makefile_] | [vm.c][vm_c] | [defs.h][defs_h]
 
 [user_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/user.h
 [usys_pl]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/usys.pl
 [syscall_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/syscall.h
 [syscall_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/syscall.c
-[sysproc_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/sysproc.c
 [riscv_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/riscv.h
+[sysproc_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/sysproc.c
 [pgaccess_test_h]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/user/pgaccess_test.c
 [Makefile_]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/Makefile
 [vm_c]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab6-55/xv6-riscv/kernel/vm.c
