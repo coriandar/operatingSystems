@@ -36,4 +36,4 @@ entry("getpid");
 entry("sbrk");
 entry("sleep");
 entry("uptime");
-entry("wait2");
+entry("wait2"); # add entry stub
