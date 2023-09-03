@@ -500,7 +500,7 @@ scheduler(void)
 
         c->proc = firstproc;
         swtch(&c->context, &firstproc->context);
-
+      
         c->proc = 0;
         release(&firstproc->lock);
     }
