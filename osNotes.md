@@ -1,5 +1,10 @@
 
 ### __Create archive with tar__
+#### Remove xv6 bloat
+```java
+cd xv6-riscv
+make clean
+```
 #### Syntax
 ```java
 tar -cvf <name of archive.tar> <path to directory to archive>
