@@ -21,3 +21,4 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_wait2  22 // add num
+#define SYS_chpriority  23 // add num

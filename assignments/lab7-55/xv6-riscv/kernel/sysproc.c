@@ -8,26 +8,41 @@
 #include "proc.h"
 
 uint64
+sys_chpriority(void)
+{
+    int pid;
+    int newnice;
+
+    if(argint(0, &pid) < 0) return -1; // get pid
+    if(argint(1, &newnice) < 0) return -1; // get pid
+
+    // TESTER
+    printf("pid: %d\n", pid);
+    printf("newnice: %d\n", newnice);
+
+    // TODO: implement rest
+
+    return 0;
+}
+
+uint64
 sys_wait2(void)
 {
-    uint64 addr, addr1, addr2, addr3;
+    uint64 addr, addr1, addr2, addr3; // initialize
     uint wtime, rtime, stime;
-    if(argaddr(0, &addr) < 0)
-        return -1;
-    if(argaddr(1, &addr1) < 0) // user virtual memory
-        return -1;
-    if(argaddr(2, &addr2) < 0)
-        return -1;
-    if(argaddr(3, &addr3) < 0)
-        return -1;
+
+    if(argaddr(0, &addr) < 0) return -1; // get args
+    if(argaddr(1, &addr1) < 0) return -1; // user virtual memory
+    if(argaddr(2, &addr2) < 0) return -1;
+    if(argaddr(3, &addr3) < 0) return -1;
+
     int ret = wait2(addr, &rtime, &wtime, &stime);
     struct proc* p = myproc();
-    if(copyout(p->pagetable, addr1,(char*)&wtime, sizeof(int)) < 0)
-        return -1;
-    if(copyout(p->pagetable, addr2,(char*)&rtime, sizeof(int)) < 0)
-        return -1;
-    if(copyout(p->pagetable, addr3, (char*)&stime, sizeof(int)) < 0)
-        return -1;
+
+    if(copyout(p->pagetable, addr1,(char*)&wtime, sizeof(int)) < 0) return -1;
+    if(copyout(p->pagetable, addr2,(char*)&rtime, sizeof(int)) < 0) return -1;
+    if(copyout(p->pagetable, addr3, (char*)&stime, sizeof(int)) < 0) return -1;
+
     return ret;
 }
 
