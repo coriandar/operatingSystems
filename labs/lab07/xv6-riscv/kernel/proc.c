@@ -457,22 +457,54 @@ scheduler(void)
     // Avoid deadlock by ensuring that devices can interrupt.
     intr_on();
 
-    for(p = proc; p < &proc[NPROC]; p++) {
-      acquire(&p->lock);
-      if(p->state == RUNNABLE) {
-        // Switch to chosen process.  It is the process's job
-        // to release its lock and then reacquire it
-        // before jumping back to us.
-        p->state = RUNNING;
-        c->proc = p;
-        swtch(&c->context, &p->context);
+// add if rr
+#ifdef RR
+    for(p = proc; p < &proc[NPROC]; p++)
+    {
+        acquire(&p->lock);
+        if(p->state == RUNNABLE) {
+            // Switch to chosen process.  It is the process's job
+            // to release its lock and then reacquire it
+            // before jumping back to us.
+            p->state = RUNNING;
+            c->proc = p;
+            swtch(&c->context, &p->context);
 
-        // Process is done running for now.
-        // It should have changed its p->state before coming back.
-        c->proc = 0;
-      }
-      release(&p->lock);
+            // Process is done running for now.
+            // It should have changed its p->state before coming back.
+            c->proc = 0;
+        }
+        release(&p->lock);
     }
+#endif
+
+// add fcfs
+#ifdef FCFS
+    struct proc* firstproc = 0;
+
+    for(p = proc; p < &proc[NPROC]; p++) {  // Go through all PCBs
+        acquire(&p->lock);
+        if(p->state == RUNNABLE) {   // If process is RUNNABLE
+            if(!firstproc || p->create_time < firstproc->create_time) {  // Either haven't found one, or this process is earlier
+                if(firstproc)
+                    release(&firstproc->lock);  // Release the previously found process, if it exists
+                firstproc = p;           // This process is the earliest
+                continue;                // Go to next one in proc
+            }
+        }
+        release(&p->lock);
+    }
+
+    if(firstproc) { // Make this the RUNNING process
+        firstproc->state = RUNNING;
+
+        c->proc = firstproc;
+        swtch(&c->context, &firstproc->context);
+
+        c->proc = 0;
+        release(&firstproc->lock);
+    }
+#endif
   }
 }
 
