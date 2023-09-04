@@ -16,7 +16,9 @@ avg_run_time = 24, wait_time = 19, sleep_time = 89
 ------------------------------------------------------------
 /*
 First Come First Serve scheduling:
-Non-preemtive algorithm, where the processes are organised as a queue. Average waiting time is not optimal, and poor unilisation of resources in parallel. Starvation does not occur as the all the processes get a chance to execute based on their arrival.
+Non-preemtive algorithm, where the processes are organised as a queue. Average waiting time is not optimal, 
+and utilisation of resources in parallel is poor. Starvation does not occur as the all the processes get a chance to 
+execute based on their arrival.
 */
 
 Scheduler: FCFS (schedtest)
@@ -31,7 +33,8 @@ avg_run_time = 31, wait_time = 21, sleep_time = 77
 ------------------------------------------------------------
 /*
 Priority scheduling
-Non-preemtive algorithm, where the process with higher priority gets executed first. Starvation can be an issue with priority scheduling, however, this can be resolved by implementing a vesion of Round Robin for the processes with the sam priority level in the queue.
+Non-preemtive algorithm, where the process with a higher priority gets executed first. Starvation can be an issue with priority scheduling, however, 
+this can be resolved by implementing Round Robin algorithm for the processes with the sam priority level in the queue.
 */
 
 Scheduler: PRIORITY (schedtest2)
