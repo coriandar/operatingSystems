@@ -112,4 +112,7 @@ struct proc {
     uint64  wait_time;
     uint64  sleep_time;
     uint64  exit_time;
+
+    // add for priority scheduling
+    int nice; // process priority (0-20), lower == higher priority
 };

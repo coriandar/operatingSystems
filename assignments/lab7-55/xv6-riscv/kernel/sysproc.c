@@ -10,19 +10,12 @@
 uint64
 sys_chpriority(void)
 {
-    int pid;
-    int newnice;
+    int pid, newnice;
 
     if(argint(0, &pid) < 0) return -1; // get pid
-    if(argint(1, &newnice) < 0) return -1; // get pid
+    if(argint(1, &newnice) < 0) return -1; // get newnice
 
-    // TESTER
-    printf("pid: %d\n", pid);
-    printf("newnice: %d\n", newnice);
-
-    // TODO: implement rest
-
-    return 0;
+    return changepriority(pid, newnice);
 }
 
 uint64

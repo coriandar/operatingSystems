@@ -13,9 +13,20 @@ main()
   if(cpuid() == 0){
     consoleinit();
     printfinit();
+
     printf("\n");
+    printf("===================================\n");
     printf("xv6 kernel is booting\n");
+#ifdef RR
+    printf("Scheduler: RR\n");
+#elif FCFS
+    printf("Scheduler: FCFS\n");
+#elif PR
+    printf("Scheduler: PRIORITY\n");
+#endif
+    printf("===================================\n");
     printf("\n");
+
     kinit();         // physical page allocator
     kvminit();       // create kernel page table
     kvminithart();   // turn on paging
