@@ -15,6 +15,13 @@ main()
     printfinit();
     printf("\n");
     printf("xv6 kernel is booting\n");
+#ifdef RR
+    printf("Scheduler: Round Robin\n");
+#elif FCFS
+    printf("Scheduler: First-Come-First-Served\n");
+#elif PRIORITY
+    printf("Scheduler: Priority Based\n");
+#endif
     printf("\n");
     kinit();         // physical page allocator
     kvminit();       // create kernel page table
