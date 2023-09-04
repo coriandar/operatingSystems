@@ -1,3 +1,9 @@
+/*
+Round Robin scheduling:
+Pre-emptive algorithm, where each process is assigned a fixed time slot in a cyclic way. It focuses on time sharing technique.
+There's no priority, and starvation does not occure due to its cyclic nature.
+*/
+
 Scheduler: RR (schedtest)
 [CPUS=1]:
 avg_run_time = 101, wait_time = 12, sleep_time = 49
@@ -8,6 +14,11 @@ avg_run_time = 40, wait_time = 9, sleep_time = 81
 [CPUS=3]:
 avg_run_time = 24, wait_time = 19, sleep_time = 89
 ------------------------------------------------------------
+/*
+First Come First Serve scheduling:
+Non-preemtive algorithm, where the processes are organised as a queue. Average waiting time is not optimal, and poor unilisation of resources in parallel. Starvation does not occur as the all the processes get a chance to execute based on their arrival.
+*/
+
 Scheduler: FCFS (schedtest)
 [CPUS=1]:
 avg_run_time = 87, wait_time = 12, sleep_time = 38
@@ -18,6 +29,11 @@ avg_run_time = 34, wait_time = 12, sleep_time = 75
 [CPUS=3]:
 avg_run_time = 31, wait_time = 21, sleep_time = 77
 ------------------------------------------------------------
+/*
+Priority scheduling
+Non-preemtive algorithm, where the process with higher priority gets executed first. Starvation can be an issue with priority scheduling, however, this can be resolved by implementing a vesion of Round Robin for the processes with the sam priority level in the queue.
+*/
+
 Scheduler: PRIORITY (schedtest2)
 [CPUS=1]:
 avg_run_time = 89, wait_time = 12, sleep_time = 100
