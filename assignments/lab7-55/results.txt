@@ -34,7 +34,7 @@ avg_run_time = 31, wait_time = 21, sleep_time = 77
 /*
 Priority scheduling
 Non-preemtive algorithm, where the process with a higher priority gets executed first. Starvation can be an issue with priority scheduling, however, 
-this can be resolved by implementing Round Robin algorithm for the processes with the sam priority level in the queue.
+this can be resolved by implementing Round Robin algorithm for the processes with the same priority level in the queue.
 */
 
 Scheduler: PRIORITY (schedtest2)
@@ -47,3 +47,52 @@ avg_run_time = 36, wait_time = 13, sleep_time = 74
 [CPUS=3]:
 avg_run_time = 27, wait_time = 19, sleep_time = 80
 ------------------------------------------------------------
+Overall: 
+Round Robin returned the lowest average run time of 24 with 3 CPUs, but it also returned the highest average
+run time of 101 with 1 CPU. 
+Round Robin returned the lowest wait time of 9 with 2 CPUs, and FCFS returned the highest of 21 with 3 CPUs.
+FCFS returned the lowest sleep time of 38 with 1 CPU, and priority returned the highest of 100 with 1 CPU.
+
+
+CPUS=1
+
+Average run time
+Highest: RR (101)
+Lowest: FCFS (87)
+
+Wait time
+Equal values overall (12)
+
+Sleep time
+Highest: Priority (100)
+Lowest: FCFS (38)
+
+
+CPUS=2
+
+Average run time
+Highest: RR (40)
+Lowest: FCFS (34)
+
+Wait time
+Highest: Priority (13)
+Lowest: RR (9)
+
+Sleep time
+Highest: RR (81)
+Lowest: Priority (74)
+
+
+CPUS=3
+
+Average run time
+Highest: FCFS (31)
+Lowest: RR (24)
+
+Wait time
+Highest: FCFS (21)
+Lowest: RR, Priority (19)
+
+Sleep time
+Highest: RR (89)
+Lowest: FCFS (77)
