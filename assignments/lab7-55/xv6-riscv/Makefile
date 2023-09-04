@@ -49,6 +49,8 @@ TOOLPREFIX := $(shell if riscv64-unknown-elf-objdump -i 2>&1 | grep 'elf64-big' 
 endif
 
 # Make round robin the default RR
+# if not defined scheduler, then make it Round Robin
+# So make qemu
 ifndef SCHEDULER
 SCHEDULER := RR
 endif
@@ -139,6 +141,7 @@ UPROGS=\
 	$U/_wc\
 	$U/_zombie\
 	$U/_schedtest\
+	$U/_schedtest2\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)

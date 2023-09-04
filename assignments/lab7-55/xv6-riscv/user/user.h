@@ -24,6 +24,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(int);
 int wait2(int*, int*, int*, int*); // add syscall
+int chpriority(int pid, int newnice); // add syscall
 
 // ulib.c
 int stat(const char*, struct stat*);
