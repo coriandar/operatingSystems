@@ -21,7 +21,7 @@ main()
     printf("Scheduler: RR\n");
 #elif FCFS
     printf("Scheduler: FCFS\n");
-#elif PR
+#elif PRIORITY
     printf("Scheduler: PRIORITY\n");
 #endif
     printf("===================================\n");

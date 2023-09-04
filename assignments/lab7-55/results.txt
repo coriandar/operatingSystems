@@ -1,0 +1,30 @@
+Scheduler: RR (schedtest)
+[CPUS=1]:
+avg_run_time = 101, wait_time = 12, sleep_time = 49
+
+[CPUS=2]:
+avg_run_time = 40, wait_time = 9, sleep_time = 81
+
+[CPUS=3]:
+avg_run_time = 24, wait_time = 19, sleep_time = 89
+------------------------------------------------------------
+Scheduler: FCFS (schedtest)
+[CPUS=1]:
+avg_run_time = 87, wait_time = 12, sleep_time = 38
+
+[CPUS=2]:
+avg_run_time = 34, wait_time = 12, sleep_time = 75
+
+[CPUS=3]:
+avg_run_time = 31, wait_time = 21, sleep_time = 77
+------------------------------------------------------------
+Scheduler: PRIORITY (schedtest2)
+[CPUS=1]:
+avg_run_time = 89, wait_time = 12, sleep_time = 100
+
+[CPUS=2]:
+avg_run_time = 36, wait_time = 13, sleep_time = 74
+
+[CPUS=3]:
+avg_run_time = 27, wait_time = 19, sleep_time = 80
+------------------------------------------------------------
