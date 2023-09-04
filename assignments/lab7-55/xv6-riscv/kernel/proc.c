@@ -123,6 +123,10 @@ found:
   p->pid = allocpid();
   p->state = USED;
 
+#ifdef PRIORITY
+  p->nice = 10; // initialize nice priority
+#endif
+
   // initialize after the process status becomes USED
   p->create_time = ticks; // current time
   p->run_time = 0;
@@ -457,7 +461,7 @@ scheduler(void)
     // Avoid deadlock by ensuring that devices can interrupt.
     intr_on();
 
-// add if rr
+// implement round-robin
 #ifdef RR
     for(p = proc; p < &proc[NPROC]; p++)
     {
@@ -478,16 +482,22 @@ scheduler(void)
     }
 #endif
 
-// add fcfs
+// implement first-come-first-served
 #ifdef FCFS
     struct proc* firstproc = 0;
 
-    for(p = proc; p < &proc[NPROC]; p++) {  // Go through all PCBs
+    for(p = proc; p < &proc[NPROC]; p++) // Go through all PCBs
+    {
         acquire(&p->lock);
-        if(p->state == RUNNABLE) {   // If process is RUNNABLE
-            if(!firstproc || p->create_time < firstproc->create_time) {  // Either haven't found one, or this process is earlier
+        if(p->state == RUNNABLE) // If process is RUNNABLE
+        {
+            // Either haven't found one, or this process is earlier
+            if(!firstproc || p->create_time < firstproc->create_time)
+            {
                 if(firstproc)
+                {
                     release(&firstproc->lock);  // Release the previously found process, if it exists
+                }
                 firstproc = p;           // This process is the earliest
                 continue;                // Go to next one in proc
             }
@@ -495,17 +505,67 @@ scheduler(void)
         release(&p->lock);
     }
 
-    if(firstproc) { // Make this the RUNNING process
+    if(firstproc) // Make this the RUNNING process
+    {
         firstproc->state = RUNNING;
-
         c->proc = firstproc;
         swtch(&c->context, &firstproc->context);
-      
         c->proc = 0;
         release(&firstproc->lock);
     }
 #endif
+
+// implement priority-scheduling
+#ifdef PR
+    struct proc *highproc = 0;
+
+    // Iterate through all processes once to find the highest priority runnable process
+    for(p = proc; p < &proc[NPROC]; p++) // Go through all PCBs
+    {
+        acquire(&p->lock);
+                      //
+        if (p->state == RUNNABLE) {
+            // checks if highproc 0, or if highproc nice greater value
+            if (highproc == 0 || highproc->nice > p->nice)
+            {
+                highproc = p; // get p->nice
+            }
+        }
+        release(&p->lock);
+    }
+
+    // Make this the RUNNING process
+    if (highproc)
+    {
+        acquire(&highproc->lock); // get lock for highproc, to modify
+        highproc->state = RUNNING;
+        c->proc = highproc;
+        swtch(&c->context, &highproc->context);
+        c->proc = 0; // Process has finished running
+        release(&highproc->lock); // Release the lock when done
+    }
+#endif
   }
+}
+
+// implement function to change priority
+int
+changepriority(int pid, int newnice)
+{
+    struct proc *p;
+
+    for(p = proc; p < &proc[NPROC]; p++)
+    {
+        acquire(&p->lock);
+        if(p->pid == pid)
+        {
+            p->nice = newnice;
+            release(&p->lock);
+            return pid;
+        }
+        release(&p->lock);
+    }
+    return -1;
 }
 
 // Switch to scheduler.  Must hold only p->lock
@@ -739,13 +799,13 @@ wait2(uint64 addr, uint* run, uint* wait, uint* sleepTime)
 
         havekids = 1;
         if(np->state == ZOMBIE){
-          // Found one.
-          pid = np->pid;
-
           // assign timing values in PCB of this process
           *run = np->run_time;
           *wait = np->wait_time;
           *sleepTime = np->sleep_time;
+
+          // Found one.
+          pid = np->pid;
 
           if(addr != 0 && copyout(p->pagetable, addr, (char *)&np->xstate,
             sizeof(np->xstate)) < 0) {

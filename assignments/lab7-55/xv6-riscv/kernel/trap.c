@@ -77,6 +77,7 @@ usertrap(void)
         exit(-1);
 
 // for fcfs, remove invocation of scheduler by the timer interrupt.
+// only do this if using round robin (the default scheduler)
 #ifdef RR
     // give up the CPU if this is a timer interrupt.
     if(which_dev == 2) yield();
