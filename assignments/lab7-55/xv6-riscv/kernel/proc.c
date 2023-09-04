@@ -516,19 +516,28 @@ scheduler(void)
 #endif
 
 // implement priority-scheduling
-#ifdef PR
+#ifdef PRIORITY
     struct proc *highproc = 0;
 
     // Iterate through all processes once to find the highest priority runnable process
     for(p = proc; p < &proc[NPROC]; p++) // Go through all PCBs
     {
+        if (p->state != RUNNABLE) continue;
+
+        // acquire and release lock when not needed
         acquire(&p->lock);
-                      //
-        if (p->state == RUNNABLE) {
-            // checks if highproc 0, or if highproc nice greater value
+        if (p->state == RUNNABLE)
+        {
+            // only if highproc nice greater value, then change
+            // if same not changes
             if (highproc == 0 || highproc->nice > p->nice)
             {
-                highproc = p; // get p->nice
+                if(highproc)
+                {
+                    release(&highproc->lock); // Release the previously found process, if it exists
+                }
+                highproc = p; // This process is highest priority
+                continue; // Go to next one in proc
             }
         }
         release(&p->lock);
@@ -537,7 +546,6 @@ scheduler(void)
     // Make this the RUNNING process
     if (highproc)
     {
-        acquire(&highproc->lock); // get lock for highproc, to modify
         highproc->state = RUNNING;
         c->proc = highproc;
         swtch(&c->context, &highproc->context);
