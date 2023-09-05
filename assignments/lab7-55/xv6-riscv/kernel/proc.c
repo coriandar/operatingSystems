@@ -567,7 +567,9 @@ changepriority(int pid, int newnice)
         acquire(&p->lock);
         if(p->pid == pid)
         {
+            //printf("before: pid=%d, nice=%d\n", p->pid, p->nice);
             p->nice = newnice;
+            //printf("after: pid=%d, nice=%d\n", p->pid, p->nice);
             release(&p->lock);
             return pid;
         }
