@@ -28,52 +28,65 @@ int upsema(struct semaphore* s) {
 
 void initrwsema(struct rwsemaphore *rws)
 {
-   // Lecture slide page 14
-   rws->readers = 0;
-   initsema(&rws->mutex, 1);
-   initsema(&rws->roomEmpty, 1); 
+   initsema(&rws->mutex, 1); // Lecture slide page 11 initalises mutex to 1
+  
+   // Initialise the number of readers, and writers to 0
+   rws->nreaders = 0;
+   rws->nwriters = 0;
 }
 
 // A Reader enters room
 int downreadsema(struct rwsemaphore *rws)
 {
-   downsema(&rws->mutex); // Locking mutex
-   rws->readers++;
-
-   if (rws->readers == 1)
+   downsema(&rws->mutex);
+   
+   while (rws->nwriters > 0)
    {
-      downsema(&rws->roomEmpty); // Locking roomEmpty
+      sleep(&rws->mutex, &rws->mutex); // If there is a writer, mutex gets put to sleep
    }
 
-   upsema(&rws->mutex); // Unlocking mutex
-
-   return rws->readers;
+   rws->nreaders++;
+   upsema(&rws->mutex); // Unlock mutex
+   
+   return 0;
 }
 
 // A Reader exits room
 int upreadsema(struct rwsemaphore *rws)
 {
     downsema(&rws->mutex);
-    rws->readers--;
 
-    if (rws->readers == 0)
+    rws->nreaders--;
+
+    if (rws->nreaders == 0 && rws->nwriters > 0)
     {
-       upsema(&rws->roomEmpty); // Unlocking roomEmpty
+       upsema(&rws->mutex); // If there is no reader present, mutex gets woken up
+    }
+    else
+    {
+       upsema(&rws->mutex);
     }
 
-    upsema(&rws->mutex);
-
-    return rws->readers;
+    return 0;
 }
 
 // A Writer enters room
 void downwritesema(struct rwsemaphore *rws)
 {
-   downsema(&rws->roomEmpty);
+   downsema(&rws->mutex);
+
+   while (rws->nreaders > 0 || rws->nwriters > 0)
+   {
+      sleep(&rws->mutex, &rws->mutex);
+   }
+
+   rws->nwriters++;
 }
 
 // A writer exits room
 void upwritesema(struct rwsemaphore *rws)
 {
-   upsema(&rws->roomEmpty);
+    rws->nwriters = 0;
+    wakeup(&rws->mutex);
+    upsema(&rws->mutex);
 }

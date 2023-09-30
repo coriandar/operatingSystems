@@ -14,6 +14,9 @@ int upsema(struct semaphore*);
 
 // Read/Write Semaphore
 struct rwsemaphore {
+   struct semaphore mutex; // To protect readers
+   struct semaphore roomEmpty; // To ensure mutex of writers
+   int readers;
 };
 
 void initrwsema(struct rwsemaphore *);
