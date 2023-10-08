@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import re
+import subprocess
+from testlib import *
+
+# test the second thread task: locking that allows put() parallelism
+@test(10, "thr_fast")
+def test_ph_fast():
+    subprocess.run(['make', 'thr'], check=True)
+    result = subprocess.run(['./thr', '2'], stdout=subprocess.PIPE, check=True)
+    out = result.stdout.decode("utf-8")
+    rate2 = re.findall(r' (\d+) puts.second$', out, re.MULTILINE)
+    assert_equal(len(rate2), 1)
+    result = subprocess.run(['./thr', '1'], stdout=subprocess.PIPE)
+    out = result.stdout.decode("utf-8")
+    rate1 = re.findall(r' (\d+) puts.second$', out, re.MULTILINE)
+    assert_equal(len(rate1), 1)
+    rate1 = float(rate1[0])
+    rate2 = float(rate2[0])
+    # demand that 2 threads yield at least 1.25x the
+    # throughput of a single thread.
+    if rate2 < 1.25 * rate1:
+        raise AssertionError('Parallel put() speedup is less than 1.25x')
+
+run_tests()
+
