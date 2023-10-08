@@ -157,8 +157,24 @@ kernel/proc.c // scheduler() priority algorithm to scheduler(void)
 [scheduler__7]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab7-55/xv6-riscv/kernel/proc.c#L519
 --------------------------------------------------
 ### __Assignment 08__
+```c
+make test1
+make test2
+```
 --------------------------------------------------
 ### __Assignment 09__
+```c
+make qemu CPUS=1
+sematest // run
+rwsematest // main testing
+
+kernel/semaphore.h
+kernel/semaphore.c
+```
+- [semaphore.h][semaphore_h_9] | [semaphore.c][semaphore_c_9]
+
+[semaphore_h_9]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab9-55/xv6-riscv/kernel/semaphore.h
+[semaphore_c_9]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab9-55/xv6-riscv/kernel/semaphore.c
 --------------------------------------------------
 ### __Assignment 10__
 --------------------------------------------------
