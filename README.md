@@ -177,6 +177,12 @@ kernel/semaphore.c
 [semaphore_c_9]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab9-55/xv6-riscv/kernel/semaphore.c
 --------------------------------------------------
 ### __Assignment 10__
+- [Lab10.md][lab10_md]
+
+[lab10_md]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab10-55/Lab10-55.md
 --------------------------------------------------
 ### __Assignment 11__
+- [Lab11.md][lab11_md]
+
+[lab11_md]: https://github.com/coriandar/operatingSystems/blob/main/assignments/lab11-55/Lab11-55.md
 --------------------------------------------------
