@@ -2,23 +2,26 @@
 ## __Process Scheduling Calculator:__
 https://boonsuen.com/process-scheduling-solver
 
-## __Scheduling Site:__
-https://solver.assistedcoding.eu/page_replacement
-
-## __Binary to Hex:__
-https://www.rapidtables.com/convert/number/binary-to-hex.html
-
 ## __Page replacement, disk and process scheduling tools:__
 https://nicomedes.assistedcoding.eu/#/dashboard
+
+## __Page Fault Calculator__
+https://solver.assistedcoding.eu/page_replacement
+
+## __Scheduling Site:__
+https://solver.assistedcoding.eu/page_replacement
 
 ## __Online C Compiler (In case):__
 https://www.programiz.com/c-programming/online-compiler/
 
 ## __Conversion Table:__
-https://www.calculatorsoup.com/calculators/ math/scientific-notation-converter.php
+https://www.calculatorsoup.com/calculators/math/scientific-notation-converter.php
 
-## __Page Fault Calculator__
-https://solver.assistedcoding.eu/page_replacement
+## __Binary to Hex:__
+https://www.rapidtables.com/convert/number/binary-to-hex.html
+
+## __Byte Calculator__
+https://whatsabyte.com/P1/byteconverter.htm
 
 --------------------------------------------------
 --------------------------------------------------
