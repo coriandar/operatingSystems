@@ -1,3 +1,13 @@
+### __Quick Links__
+- [Resources.md][resources_md]
+- [Formulas.md][formulas_md]
+- [Readings.md][readings_md]
+
+[resources_md]: https://github.com/coriandar/operatingSystems/blob/main/os/_00_Resources.md
+[formulas_md]: https://github.com/coriandar/operatingSystems/blob/main/os/_00_Formulas.md
+[readings_md]: https://github.com/coriandar/operatingSystems/tree/main/os
+
+--------------------------------------------------
 ### __Assignment 02__
 #### Shell script Operators
 ```java
