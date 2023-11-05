@@ -35,3 +35,6 @@ https://whatsabyte.com/P1/byteconverter.htm
 - [x] Linux Shell Scripting Bootcamp, 2017, James Kent Lewis
 - [x] Learn C programming, 2020, Jef Szuhay
 - [x] Fundamentals of Linux, 2018, Oliver Pelz
+- [x] https://pages.cs.wisc.edu/~remzi/OSTEP/
+- [x] https://pages.cs.wisc.edu/~remzi/OSTEP/Homework/homework.html
+- [x] https://github.com/remzi-arpacidusseau/ostep-homework/tree/master
