@@ -27,6 +27,14 @@ https://whatsabyte.com/P1/byteconverter.htm
 --------------------------------------------------
 --------------------------------------------------
 
+# Repos:
+- https://github.com/sjsakib/cs
+- https://github.com/sd-omkar/cs537
+
+--------------------------------------------------
+--------------------------------------------------
+--------------------------------------------------
+
 # _BOOKS_
 ## __Essential__
 - [x] Operating System Concepts, 2018, Abraham Silberschatz; Greg Gagne
